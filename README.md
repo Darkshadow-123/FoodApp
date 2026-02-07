@@ -1,97 +1,102 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Food App
 
-# Getting Started
+A React Native mobile application for browsing food items from a mock API, viewing details, and saving favorites.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Tech Stack
 
-## Step 1: Start Metro
+- **React Native CLI** (0.83.1)
+- **TypeScript**
+- **React Navigation** (Stack + Bottom Tabs)
+- **AsyncStorage** (favorites persistence)
+- **Jest** + **React Native Testing Library**
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Features
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+- Home screen with food items list
+- Detailed view for each food item
+- Favorites management with AsyncStorage persistence
+- Search functionality
+- Pull-to-refresh
+- Loading, error, and empty states
 
-```sh
-# Using npm
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v16 or higher)
+- Android Studio or Xcode
+- React Native CLI
+- Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide
+
+### Installation
+
+```bash
+npm install
+```
+
+### Running the App
+
+#### Start Metro
+
+```bash
 npm start
-
-# OR using Yarn
-yarn start
 ```
 
-## Step 2: Build and run your app
+#### Android
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
+```bash
 npm run android
-
-# OR using Yarn
-yarn android
 ```
 
-### iOS
+#### iOS
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+For iOS, install CocoaPods dependencies first:
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
+```bash
+cd ios && pod install && cd ..
 ```
 
-Then, and every time you update your native dependencies, run:
+Then run:
 
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+```bash
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+### Running Tests
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+```bash
+npm test
+```
 
-## Step 3: Modify your app
+## Project Structure
 
-Now that you have successfully run the app, let's make changes!
+```
+FoodApp/
+├── src/
+│   ├── api/           # API service
+│   ├── components/    # Reusable UI components
+│   ├── context/       # Context providers
+│   ├── navigation/    # Navigation setup
+│   ├── screens/       # Screen components
+│   ├── types/         # TypeScript types
+│   └── utils/         # Utility functions
+├── __tests__/         # Test files
+└── App.tsx            # Root component
+```
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+## API
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+The app fetches food items from:
+```
+https://api.jsonbin.io/v3/b/698184b543b1c97be96155bf
+```
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+## Screens
 
-## Congratulations! :tada:
+1. **Home** - List of all food items with search and pull-to-refresh
+2. **Details** - Detailed view of a food item
+3. **Favorites** - List of favorited food items
 
-You've successfully run and modified your React Native App. :partying_face:
+## License
 
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+This project was created as part of a React Native assignment.
