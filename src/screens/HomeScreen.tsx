@@ -8,7 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { fetchFoodItems } from '../api/foodService';
 import { FoodItem, AppState } from '../types';
 import { FoodCard } from '../components/FoodCard';
@@ -17,14 +17,14 @@ import { EmptyState } from '../components/EmptyState';
 import { ErrorMessage } from '../components/ErrorMessage';
 
 export function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp<{ Details: { item: FoodItem } }>>();
   const [state, setState] = useState<AppState>('idle');
   const [items, setItems] = useState<FoodItem[]>([]);
   const [filteredItems, setFilteredItems] = useState<FoodItem[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [refreshing, setRefreshing] = useState(false);
 
-  const loadItems = useCallback(async () => {
+  const loadItems = useCallback(async function loadItems() : Promise<void> {
     try {
       setState('loading');
       const data = await fetchFoodItems();
@@ -43,7 +43,7 @@ export function HomeScreen() {
   useEffect(() => {
     if (searchQuery.trim()) {
       const filtered = items.filter(item =>
-        item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.cuisine.toLowerCase().includes(searchQuery.toLowerCase())
       );

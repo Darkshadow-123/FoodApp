@@ -25,24 +25,32 @@ jest.mock('@react-navigation/native', () => {
 
 const mockFoodItems = [
   {
-    id: '1',
-    name: 'Pizza',
-    image: 'https://example.com/pizza.jpg',
+    id: 1,
+    title: 'Pizza',
+    thumbNailImage: 'https://example.com/pizza.jpg',
+    mainImage: 'https://example.com/pizza.jpg',
     rating: 4.5,
     category: 'Italian',
     cuisine: 'Italian',
     description: 'Delicious pizza',
     tags: ['vegetarian', 'cheese'],
+    price: 100,
+    prepTimeMins: 20,
+    isVeg: true,
   },
   {
-    id: '2',
-    name: 'Sushi',
-    image: 'https://example.com/sushi.jpg',
+    id: 2,
+    title: 'Sushi',
+    thumbNailImage: 'https://example.com/sushi.jpg',
+    mainImage: 'https://example.com/sushi.jpg',
     rating: 4.8,
     category: 'Japanese',
     cuisine: 'Japanese',
     description: 'Fresh sushi',
     tags: ['seafood', 'raw'],
+    price: 200,
+    prepTimeMins: 30,
+    isVeg: false,
   },
 ];
 

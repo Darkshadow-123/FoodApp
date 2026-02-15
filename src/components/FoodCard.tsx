@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Text, ActivityIndicator } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, TouchableOpacity, Text, Image, ActivityIndicator } from 'react-native';
 import { FoodItem } from '../types';
 import { useFavorites } from '../context/FavoritesContext';
 
@@ -10,35 +10,45 @@ interface FoodCardProps {
 
 export function FoodCard({ item, onPress }: FoodCardProps) {
   const { isFavorite, toggleFavorite } = useFavorites();
-  const favorite = isFavorite(item.id);
+  const favorite = isFavorite(String(item.id));
+  const [imageError, setImageError] = useState(false);
 
   return (
     <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.8}>
       <View style={styles.imageContainer}>
-        <View style={styles.skeleton}>
-          <ActivityIndicator size="small" color="#ccc" />
-        </View>
+        {!imageError ? (
+          <Image
+            source={{ uri: item.thumbNailImage }}
+            style={styles.image}
+            onError={() => setImageError(true)}
+          />
+        ) : (
+          <View style={styles.skeleton}>
+            <ActivityIndicator size="small" color="#ccc" />
+          </View>
+        )}
       </View>
       <View style={styles.content}>
         <View style={styles.header}>
-          <Text style={styles.title} testID="food-title">
-            {item.name}
+          <Text style={styles.title} testID="food-title" numberOfLines={1}>
+            {item.title}
           </Text>
           <View style={styles.ratingContainer}>
             <View style={styles.starPlaceholder} />
             <Text style={styles.ratingText}>{item.rating}</Text>
           </View>
         </View>
-        <Text style={styles.category}>{item.category}</Text>
+        <Text style={styles.category}>{item.cuisine}</Text>
         {item.tags && item.tags.length > 0 && (
           <Text style={styles.tags}>{item.tags.join(', ')}</Text>
         )}
+        <Text style={styles.price}>₹{item.price}</Text>
       </View>
       <TouchableOpacity
         style={[styles.favoriteButton, favorite && styles.favoriteButtonActive]}
         onPress={(e) => {
           e.stopPropagation();
-          toggleFavorite(item.id);
+          toggleFavorite(String(item.id));
         }}
         activeOpacity={0.7}
       >
@@ -63,6 +73,11 @@ const styles = StyleSheet.create({
   imageContainer: {
     height: 150,
     backgroundColor: '#f5f5f5',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
   },
   skeleton: {
     flex: 1,
@@ -113,6 +128,12 @@ const styles = StyleSheet.create({
   tags: {
     fontSize: 12,
     color: '#999',
+  },
+  price: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#007AFF',
+    marginTop: 4,
   },
   favoriteButton: {
     position: 'absolute',

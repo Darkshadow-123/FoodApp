@@ -23,8 +23,8 @@ export function FavoritesScreen() {
     try {
       const response = await fetch('https://api.jsonbin.io/v3/b/698184b543b1c97be96155bf');
       const data = await response.json();
-      const allItems = data.record || [];
-      const filtered = allItems.filter((item: FoodItem) => favorites.has(item.id));
+      const allItems = data.record.data || [];
+      const filtered = allItems.filter((item: FoodItem) => favorites.has(String(item.id)));
       setFavoriteItems(filtered);
     } catch (error) {
       console.error('Failed to load favorites:', error);

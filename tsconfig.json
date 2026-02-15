@@ -1,8 +1,12 @@
+// ...existing code...
 {
-  "extends": "@react-native/typescript-config",
+  "extends": "./node_modules/@react-native/typescript-config/tsconfig.json",
   "compilerOptions": {
     "types": ["jest"],
+    "target": "es5",
+    "lib": ["es2015", "dom"]
   },
   "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["**/node_modules", "**/Pods"]
+  "exclude": ["android","**/node_modules", "**/Pods"]
 }
+// ...existing code...

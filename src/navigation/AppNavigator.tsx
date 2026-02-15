@@ -1,4 +1,5 @@
 import React from 'react';
+import { View, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -81,7 +82,7 @@ export function AppNavigator() {
   );
 }
 
-const styles = {
+const styles = StyleSheet.create({
   iconContainer: {
     width: 24,
     height: 24,
@@ -100,4 +101,4 @@ const styles = {
     borderRadius: 9,
     backgroundColor: '#FF4444',
   },
-};
+});

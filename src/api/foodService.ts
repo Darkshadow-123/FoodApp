@@ -12,7 +12,7 @@ export async function fetchFoodItems(): Promise<FoodItem[]> {
 
     const data = await response.json();
     
-    return data.record || [];
+    return data.record.data || [];
   } catch (error) {
     throw new Error('Failed to fetch food items');
   }

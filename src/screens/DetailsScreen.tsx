@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   SafeAreaView,
+  Image,
 } from 'react-native';
 import { RouteProp, useRoute, useNavigation } from '@react-navigation/native';
 import { FoodItem } from '../types';
@@ -18,13 +19,22 @@ export function DetailsScreen() {
   const navigation = useNavigation();
   const { item } = route.params;
   const { isFavorite, toggleFavorite } = useFavorites();
-  const favorite = isFavorite(item.id);
+  const favorite = isFavorite(String(item.id));
+  const [imageError, setImageError] = useState(false);
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.imageContainer}>
-          <View style={styles.imagePlaceholder} />
+          {!imageError ? (
+            <Image
+              source={{ uri: item.mainImage }}
+              style={styles.image}
+              onError={() => setImageError(true)}
+            />
+          ) : (
+            <View style={styles.imagePlaceholder} />
+          )}
           <TouchableOpacity
             style={styles.backButton}
             onPress={() => navigation.goBack()}
@@ -33,14 +43,21 @@ export function DetailsScreen() {
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.favoriteButton, favorite && styles.favoriteButtonActive]}
-            onPress={() => toggleFavorite(item.id)}
+            onPress={() => toggleFavorite(String(item.id))}
           >
             <View style={[styles.heartIcon, favorite && styles.heartIconFilled]} />
           </TouchableOpacity>
         </View>
 
         <View style={styles.content}>
-          <Text style={styles.title}>{item.name}</Text>
+          <Text style={styles.title}>{item.title}</Text>
+
+          <View style={styles.priceRow}>
+            <Text style={styles.price}>₹{item.price}</Text>
+            {item.prepTimeMins && (
+              <Text style={styles.prepTime}>{item.prepTimeMins} mins</Text>
+            )}
+          </View>
 
           <View style={styles.ratingContainer}>
             <View style={styles.starIcon} />
@@ -97,8 +114,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
     position: 'relative',
   },
+  image: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
   imagePlaceholder: {
     flex: 1,
+    backgroundColor: '#f5f5f5',
   },
   backButton: {
     position: 'absolute',
@@ -160,7 +183,22 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: '700',
     color: '#333',
+    marginBottom: 8,
+  },
+  priceRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: 16,
+  },
+  price: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#007AFF',
+    marginRight: 16,
+  },
+  prepTime: {
+    fontSize: 14,
+    color: '#666',
   },
   ratingContainer: {
     flexDirection: 'row',

@@ -5,10 +5,10 @@ describe('FoodService', () => {
   describe('getCategories', () => {
     it('should extract unique categories from food items', () => {
       const mockItems: FoodItem[] = [
-        { id: '1', name: 'Pizza', image: '', rating: 4.5, category: 'Italian', cuisine: 'Italian' },
-        { id: '2', name: 'Sushi', image: '', rating: 4.8, category: 'Japanese', cuisine: 'Japanese' },
-        { id: '3', name: 'Pasta', image: '', rating: 4.3, category: 'Italian', cuisine: 'Italian' },
-        { id: '4', name: 'Tacos', image: '', rating: 4.6, category: 'Mexican', cuisine: 'Mexican' },
+        { id: 1, title: 'Pizza', thumbNailImage: '', mainImage: '', rating: 4.5, category: 'Italian', cuisine: 'Italian', description: '', price: 100, prepTimeMins: 20, isVeg: true },
+        { id: 2, title: 'Sushi', thumbNailImage: '', mainImage: '', rating: 4.8, category: 'Japanese', cuisine: 'Japanese', description: '', price: 200, prepTimeMins: 30, isVeg: false },
+        { id: 3, title: 'Pasta', thumbNailImage: '', mainImage: '', rating: 4.3, category: 'Italian', cuisine: 'Italian', description: '', price: 150, prepTimeMins: 25, isVeg: true },
+        { id: 4, title: 'Tacos', thumbNailImage: '', mainImage: '', rating: 4.6, category: 'Mexican', cuisine: 'Mexican', description: '', price: 120, prepTimeMins: 15, isVeg: false },
       ];
 
       const categories = getCategories(mockItems);
@@ -25,9 +25,9 @@ describe('FoodService', () => {
 
     it('should return categories in alphabetical order', () => {
       const mockItems: FoodItem[] = [
-        { id: '1', name: 'Z', image: '', rating: 4, category: 'Zebra', cuisine: 'Test' },
-        { id: '2', name: 'A', image: '', rating: 4, category: 'Apple', cuisine: 'Test' },
-        { id: '3', name: 'M', image: '', rating: 4, category: 'Mango', cuisine: 'Test' },
+        { id: 1, title: 'Z', thumbNailImage: '', mainImage: '', rating: 4, category: 'Zebra', cuisine: 'Test', description: '', price: 100, prepTimeMins: 20, isVeg: true },
+        { id: 2, title: 'A', thumbNailImage: '', mainImage: '', rating: 4, category: 'Apple', cuisine: 'Test', description: '', price: 100, prepTimeMins: 20, isVeg: true },
+        { id: 3, title: 'M', thumbNailImage: '', mainImage: '', rating: 4, category: 'Mango', cuisine: 'Test', description: '', price: 100, prepTimeMins: 20, isVeg: true },
       ];
 
       const categories = getCategories(mockItems);
@@ -37,9 +37,9 @@ describe('FoodService', () => {
 
     it('should handle items with same category', () => {
       const mockItems: FoodItem[] = [
-        { id: '1', name: 'Item 1', image: '', rating: 4, category: 'Same', cuisine: 'Test' },
-        { id: '2', name: 'Item 2', image: '', rating: 4, category: 'Same', cuisine: 'Test' },
-        { id: '3', name: 'Item 3', image: '', rating: 4, category: 'Same', cuisine: 'Test' },
+        { id: 1, title: 'Item 1', thumbNailImage: '', mainImage: '', rating: 4, category: 'Same', cuisine: 'Test', description: '', price: 100, prepTimeMins: 20, isVeg: true },
+        { id: 2, title: 'Item 2', thumbNailImage: '', mainImage: '', rating: 4, category: 'Same', cuisine: 'Test', description: '', price: 100, prepTimeMins: 20, isVeg: true },
+        { id: 3, title: 'Item 3', thumbNailImage: '', mainImage: '', rating: 4, category: 'Same', cuisine: 'Test', description: '', price: 100, prepTimeMins: 20, isVeg: true },
       ];
 
       const categories = getCategories(mockItems);
